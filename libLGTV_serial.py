@@ -105,7 +105,7 @@ actual_codes['02C_etc'].update({
     'inputhdmipc'           : b"kb 00 09",
     'inputstatus'           : b"kb 00 ff"
 })
-#actual_codes['LW_etc'] = common_codes.copy()
+actual_codes['LW_etc'] = {}
 actual_codes['LW_etc'].update({
     'inputav1'              : b"xb 0 00100000",
     'inputav2'              : b"xb 0 00100001",
