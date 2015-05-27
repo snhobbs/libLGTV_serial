@@ -10,16 +10,16 @@ from filelock import FileLock
 
 actual_codes = {}
 common_codes = {
-    'aspect43'      : b"kc 00 01",
-    'aspect169'     : b"kc 00 02",
-    'aspectstatus'  : b"kc 00 ff",
-    'poweroff'      : b"ka 00 00",
-    'poweron'       : b"ka 00 01",
-    'powerstatus'   : b"ka 00 ff",
-    'volumelevel'   : b"kf 00 ff",
-    'mute'          : b"ke 00 00",
-    'unmute'        : b"ke 00 01",
-    'mutestatus'    : b"ke 00 ff"
+    'aspect43'              : b"kc 00 01",
+    'aspect169'             : b"kc 00 02",
+    'aspectstatus'          : b"kc 00 ff",
+    'poweroff'              : b"ka 00 00",
+    'poweron'               : b"ka 00 01",
+    'powerstatus'           : b"ka 00 ff",
+    'volumelevel'           : b"kf 00 ff",
+    'mute'                  : b"ke 00 00",
+    'unmute'                : b"ke 00 01",
+    'mutestatus'            : b"ke 00 ff"
 }
 actual_codes['LK450_etc'] = common_codes.copy()
 actual_codes['LK450_etc'].update({
@@ -86,24 +86,38 @@ actual_codes['LC7D_etc'].update({
 })
 actual_codes['01C_etc'] = common_codes.copy()
 actual_codes['01C_etc'].update({
-    'inputav'       : b"kb 00 02",
-    'inputcomp1'    : b"kb 00 04",
-    'inputcomp2'    : b"kb 00 05",
-    'inputrgbdtv'   : b"kb 00 06",
-    'inputrgbpc'    : b"kb 00 07",
-    'inputhdmidtv'  : b"kb 00 08",
-    'inputhdmipc'   : b"kb 00 09",
-    'inputstatus'   : b"kb 00 ff"
+    'inputav'               : b"kb 00 02",
+    'inputcomp1'            : b"kb 00 04",
+    'inputcomp2'            : b"kb 00 05",
+    'inputrgbdtv'           : b"kb 00 06",
+    'inputrgbpc'            : b"kb 00 07",
+    'inputhdmidtv'          : b"kb 00 08",
+    'inputhdmipc'           : b"kb 00 09",
+    'inputstatus'           : b"kb 00 ff"
 })
 actual_codes['02C_etc'] = common_codes.copy()
 actual_codes['02C_etc'].update({
-    'inputav'       : b"kb 00 02",
-    'inputcomp1'    : b"kb 00 04",
-    'inputcomp2'    : b"kb 00 05",
-    'inputrgbpc'    : b"kb 00 07",
-    'inputhdmidtv'  : b"kb 00 08",
-    'inputhdmipc'   : b"kb 00 09",
-    'inputstatus'   : b"kb 00 ff"
+    'inputav'               : b"kb 00 02",
+    'inputcomp1'            : b"kb 00 04",
+    'inputcomp2'            : b"kb 00 05",
+    'inputrgbpc'            : b"kb 00 07",
+    'inputhdmidtv'          : b"kb 00 08",
+    'inputhdmipc'           : b"kb 00 09",
+    'inputstatus'           : b"kb 00 ff"
+})
+#actual_codes['LW_etc'] = common_codes.copy()
+actual_codes['LW_etc'].update({
+    'inputav1'              : b"xb 0 00100000",
+    'inputav2'              : b"xb 0 00100001",
+    'inputhdmi1'            : b"xb 0 01110000",
+    'inputhdmi2'            : b"xb 0 01110001",
+    'inputhdmi3'            : b"xb 0 01110010",
+    'inputhdmi4'            : b"xb 0 01110011",
+    'inputrgbpc'            : b"xb 0 01100000",
+    '3Dstatus'              : b"xt 0 FF FF FF FF",
+    '3Dnone'                : b"xt 0 01 00 00 00",
+    '3Dsbs'                 : b"xt 0 00 01 00 00",
+    '3Dou'                  : b"xt 0 00 00 00 00"
 })
 reverse_code_map = {
     'LK450_etc': ('LV2500', 'LV2520', 'LV3500', 'LV3520', 'LK330', 'LK430', 'LK450',
@@ -117,7 +131,8 @@ reverse_code_map = {
                     'LV3700', 'LV5400', 'LV5500', 'LV9500', 'LK530', 'LK550', 'PZ750',
                     'PZ950', 'PZ950U'),
     '01C_etc': ('01C', '01C-BA'),
-    '02C_etc': ('02C', '02C-BA', '02C-BH')
+    '02C_etc': ('02C', '02C-BA', '02C-BH'),
+    'LW_etc': ('LW650s')
 }
 all_codes = {}
 # populate model suffix lookup hash
@@ -150,7 +165,7 @@ class LGTV:
     def get_port(self):
         return serial.Serial(self.port, 9600, 8, serial.PARITY_NONE,
                 serial.STOPBITS_ONE, xonxoff=0, rtscts=0, timeout=1)
-                                    
+
     def get_port_ensured(self):
         ser = None
         while ser == None:
@@ -159,7 +174,7 @@ class LGTV:
             except serial.serialutil.SerialException:
                 time.sleep(0.07)
         return ser
-    
+
     def status_code(self, code):
         return code[:-2] + b'ff'
 
@@ -194,7 +209,7 @@ class LGTV:
             return self.query_data(self.lookup(command))
         else:
             return self.query_full(self.lookup(command)) and True
-       
+
     def is_status(self, command):
         return command.endswith('status') or command.endswith('level')
 
@@ -222,8 +237,6 @@ class LGTV:
             data = toggledata[1]
         return code[0:6] + data
 
-
-
 # ======= These are the methods you'll most probably want to use ==========
 
     def send(self, command):
@@ -241,7 +254,7 @@ class LGTV:
             response = self.query(command)
         self.connection.close()
         return response
-            
+
     def available_commands(self):
         print("Some features (such as a 4th HDMI port) might not be available for your TV model")
         commands = self.codes.copy()
@@ -256,8 +269,8 @@ class LGTV:
 
     def add_toggle(self, command, state0, state1):
         self.toggles['toggle' + command] = (state0, state1)
-        
+
     def debounce(self, command, wait_secs=0.5):
         self.debounces[command] = wait_secs
-            
+
 # end class LGTV
