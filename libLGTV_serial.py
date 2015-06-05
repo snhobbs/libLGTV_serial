@@ -105,19 +105,19 @@ actual_codes['02C_etc'].update({
     'inputhdmipc'           : b"kb 00 09",
     'inputstatus'           : b"kb 00 ff"
 })
-#actual_codes['LW_etc'] = common_codes.copy()
-actual_codes['LW_etc'].update({
-    'inputav1'              : b"xb 0 00100000",
-    'inputav2'              : b"xb 0 00100001",
-    'inputhdmi1'            : b"xb 0 01110000",
-    'inputhdmi2'            : b"xb 0 01110001",
-    'inputhdmi3'            : b"xb 0 01110010",
-    'inputhdmi4'            : b"xb 0 01110011",
-    'inputrgbpc'            : b"xb 0 01100000",
+actual_codes['LW650_etc'] = {}
+actual_codes['LW650_etc'].update({
+    'inputav1'              : b"xb 0 20",
+    'inputav2'              : b"xb 0 21",
+    'inputhdmi1'            : b"xb 0 70",
+    'inputhdmi2'            : b"xb 0 71",
+    'inputhdmi3'            : b"xb 0 72",
+    'inputhdmi4'            : b"xb 0 73",
+    'inputrgbpc'            : b"xb 0 60",
     '3Dstatus'              : b"xt 0 FF FF FF FF",
-    '3Dnone'                : b"xt 0 01 00 00 00",
-    '3Dsbs'                 : b"xt 0 00 01 00 00",
-    '3Dou'                  : b"xt 0 00 00 00 00"
+    '3Dnone'                : b"xt 0 1 0 0 0",
+    '3Dsbs'                 : b"xt 0 0 1 0 0",
+    '3Dou'                  : b"xt 0 0 0 0 0"
 })
 reverse_code_map = {
     'LK450_etc': ('LV2500', 'LV2520', 'LV3500', 'LV3520', 'LK330', 'LK430', 'LK450',
@@ -132,7 +132,7 @@ reverse_code_map = {
                     'PZ950', 'PZ950U'),
     '01C_etc': ('01C', '01C-BA'),
     '02C_etc': ('02C', '02C-BA', '02C-BH'),
-    'LW_etc': ('LW650s')
+    'LW650_etc': ('LW650', 'LW650s')
 }
 all_codes = {}
 # populate model suffix lookup hash
