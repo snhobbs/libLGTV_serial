@@ -9,130 +9,23 @@ from filelock import FileLock
 
 
 actual_codes = {}
-common_codes = {
-    'aspect43'              : b"kc 00 01",
-    'aspect169'             : b"kc 00 02",
-    'aspectstatus'          : b"kc 00 ff",
-    'poweroff'              : b"ka 00 00",
-    'poweron'               : b"ka 00 01",
-    'powerstatus'           : b"ka 00 ff",
-    'volumelevel'           : b"kf 00 ff",
-    'mute'                  : b"ke 00 00",
-    'unmute'                : b"ke 00 01",
-    'mutestatus'            : b"ke 00 ff"
-}
-actual_codes['LK450_etc'] = common_codes.copy()
-actual_codes['LK450_etc'].update({
-    'inputdigitalantenna'   : b"xb 00 00",
-    'inputdigitalcable'     : b"xb 00 01",
-    'inputanalogantenna'    : b"xb 00 10",
-    'inputanalogcable'      : b"xb 00 11",
-    'inputav1'              : b"xb 00 20",
-    'inputav2'              : b"xb 00 21",
-    'inputcomp1'            : b"xb 00 40",
-    'inputcomp2'            : b"xb 00 41",
-    'inputrgbpc'            : b"xb 00 60",
-    'inputhdmi1'            : b"xb 00 90",
-    'inputhdmi2'            : b"xb 00 91",
-    'inputhdmi3'            : b"xb 00 92",
-    'inputhdmi4'            : b"xb 00 93",
-    'inputstatus'           : b"xb 00 ff"
-})
-actual_codes['PJ250_etc'] = common_codes.copy()
-actual_codes['PJ250_etc'].update({
-    'inputdtvantenna'       : b"xb 00 00",
-    'inputdtvcable'         : b"xb 00 01",
-    'inputanalogantenna'    : b"xb 00 10",
-    'inputanalogcable'      : b"xb 00 11",
-    'inputav1'              : b"xb 00 20",
-    'inputav2'              : b"xb 00 21",
-    'inputcomp1'            : b"xb 00 40",
-    'inputcomp2'            : b"xb 00 41",
-    'inputrgbpc'            : b"xb 00 60",
-    'inputhdmi1'            : b"xb 00 90",
-    'inputhdmi2'            : b"xb 00 91",
-    'inputhdmi3'            : b"xb 00 92",
-    'inputstatus'           : b"xb 00 ff"
-})
-actual_codes['LE5300_etc'] = common_codes.copy()
-actual_codes['LE5300_etc'].update({
-    'inputdtv'              : b"xb 00 00",
-    'inputanalogantenna'    : b"xb 00 10",
-    'inputanalogcable'      : b"xb 00 11",
-    'inputav1'              : b"xb 00 20",
-    'inputav2'              : b"xb 00 21",
-    'inputcomp'             : b"xb 00 40",
-    'inputrgbpc'            : b"xb 00 60",
-    'inputhdmi1'            : b"xb 00 90",
-    'inputhdmi2'            : b"xb 00 91",
-    'inputhdmi3'            : b"xb 00 92",
-    'inputhdmi4'            : b"xb 00 93",
-    'inputstatus'           : b"xb 00 ff"
-})
-actual_codes['LC7D_etc'] = common_codes.copy()
-actual_codes['LC7D_etc'].update({
-    'inputdtvantenna'       : b"xb 00 00",
-    'inputdtvcable'         : b"xb 00 01",
-    'inputanalogantenna'    : b"xb 00 10",
-    'inputanalogcable'      : b"xb 00 11",
-    'inputav1'              : b"xb 00 20",
-    'inputav2'              : b"xb 00 21",
-    'inputcomp1'            : b"xb 00 40",
-    'inputcomp2'            : b"xb 00 41",
-    'inputrgbpc'            : b"xb 00 60",
-    'inputhdmi1'            : b"xb 00 90",
-    'inputhdmi2'            : b"xb 00 91",
-    'inputstatus'           : b"xb 00 ff"
-})
-actual_codes['01C_etc'] = common_codes.copy()
-actual_codes['01C_etc'].update({
-    'inputav'               : b"kb 00 02",
-    'inputcomp1'            : b"kb 00 04",
-    'inputcomp2'            : b"kb 00 05",
-    'inputrgbdtv'           : b"kb 00 06",
-    'inputrgbpc'            : b"kb 00 07",
-    'inputhdmidtv'          : b"kb 00 08",
-    'inputhdmipc'           : b"kb 00 09",
-    'inputstatus'           : b"kb 00 ff"
-})
-actual_codes['02C_etc'] = common_codes.copy()
-actual_codes['02C_etc'].update({
-    'inputav'               : b"kb 00 02",
-    'inputcomp1'            : b"kb 00 04",
-    'inputcomp2'            : b"kb 00 05",
-    'inputrgbpc'            : b"kb 00 07",
-    'inputhdmidtv'          : b"kb 00 08",
-    'inputhdmipc'           : b"kb 00 09",
-    'inputstatus'           : b"kb 00 ff"
-})
-actual_codes['LW650_etc'] = {}
-actual_codes['LW650_etc'].update({
-    'inputav1'              : b"xb 0 20",
-    'inputav2'              : b"xb 0 21",
-    'inputhdmi1'            : b"xb 0 70",
-    'inputhdmi2'            : b"xb 0 71",
-    'inputhdmi3'            : b"xb 0 72",
-    'inputhdmi4'            : b"xb 0 73",
-    'inputrgbpc'            : b"xb 0 60",
-    '3Dstatus'              : b"xt 0 FF FF FF FF",
-    '3Dnone'                : b"xt 0 1 0 0 0",
-    '3Dsbs'                 : b"xt 0 0 1 0 0",
-    '3Dou'                  : b"xt 0 0 0 0 0"
+common_codes = {}
+actual_codes['LW_etc'] = {}
+actual_codes['LW_etc'].update({
+    'inputav1'              : "xb 0 20",
+    'inputav2'              : "xb 0 21",
+    'inputhdmi1'            : "xb 0 70",
+    'inputhdmi2'            : "xb 0 71",
+    'inputhdmi3'            : "xb 0 72",
+    'inputhdmi4'            : "xb 0 73",
+    'inputrgbpc'            : "xb 0 60",
+    '3Dstatus'              : "xt 0 FF FF FF FF",
+    '3Dnone'                : "xt 0 1 0 0 0",
+    '3Dsbs'                 : "xt 0 0 1 0 0",
+    '3Dou'                  : "xt 0 0 0 0 0"
 })
 reverse_code_map = {
-    'LK450_etc': ('LV2500', 'LV2520', 'LV3500', 'LV3520', 'LK330', 'LK430', 'LK450',
-                    'LK520', 'PW340', 'PW350', 'PW350U', 'PW350R', 'LH20', 'LH200C',
-                    'LH30', 'LF11', 'LF21', 'LU55', 'CL10', 'CL20', 'CL11', 'PZ200'),
-    'PJ250_etc': ('PJ250', 'PK250', 'PK280', 'PK290', 'PJ340', 'PJ350', 'PK350',
-                    'PKPK340', 'PK540', 'PJ550', 'PK550', 'PJ350C', 'PK550C'),
-    'LC7D_etc': ('LC7D', 'LC7DC', 'PC5D', 'PC5DC'),
-    'LE5300_etc': ('LE5300', 'LE5500', 'LE7300', 'LE530C', 'LD420', 'LD450', 'LD450C',
-                    'LD520', 'LD520C', 'LD630', 'LW5600', 'LW5700', 'LW6500', 'LW9800',
-                    'LV3700', 'LV5400', 'LV5500', 'LV9500', 'LK530', 'LK550', 'PZ750',
-                    'PZ950', 'PZ950U'),
-    '01C_etc': ('01C', '01C-BA'),
-    '02C_etc': ('02C', '02C-BA', '02C-BH'),
-    'LW650_etc': ('LW650', 'LW650s')
+    'LW_etc': ('LW650', 'LW650s', 'LW650S')
 }
 all_codes = {}
 # populate model suffix lookup hash
@@ -176,7 +69,7 @@ class LGTV:
         return ser
 
     def status_code(self, code):
-        return code[:-2] + b'ff'
+        return code[:-2] + 'ff'
 
     def lookup(self, command):
         if command.startswith('toggle'):
@@ -194,7 +87,7 @@ class LGTV:
 
     # Returns None on error, full response otherwise
     def query_full(self, code):
-        self.connection.write(code + b'\r')
+        self.connection.write(code + '\r')
         response = self.connection.read(10)
         if self.is_success(response):
             return response
@@ -214,7 +107,7 @@ class LGTV:
         return command.endswith('status') or command.endswith('level')
 
     def is_success(self, response):
-        return response[-5:-3] == b'OK'
+        return response[-5:-3] == 'OK'
 
     def hex_bytes_delta(self, hex_bytes, delta):
         return bytearray(hex(int(hex_bytes, 16) + delta)[2:4], 'ascii')
@@ -262,8 +155,8 @@ class LGTV:
         for command in commands.keys():
             code = commands[command]
             if command.endswith('level'):
-                print("%s : %s" % (command[:-5] + 'up', code[:-2] + b'??'))
-                print("%s : %s" % (command[:-5] + 'down', code[:-2] + b'??'))
+                print("%s : %s" % (command[:-5] + 'up', code[:-2] + '??'))
+                print("%s : %s" % (command[:-5] + 'down', code[:-2] + '??'))
             else:
                 print("{0} : {1}".format(command, code))
 
