@@ -4,12 +4,13 @@
 import sys
 from libLGTV_serial import LGTV
 
-model = '42LK450'                    # Change this to your TV's model
+# Change this to your TV's model
+model = '42LW650s'
 
 # Change this to the serial port you're using
 # On Linux it might look like '/dev/ttyS0'
 # On a Mac it might look like '/dev/tty.usbmodemfa2321'
-serial_port = "\\.\COM4"
+serial_port = "/dev/ttyS0"
 
 # Verify passed command
 if len(sys.argv) != 2: 
@@ -21,7 +22,7 @@ tv = LGTV(model, serial_port)
 
 # Example of adding a custom toggle command. Passing in '--toggleinput'
 # will toggle between 'inputrgbpc' and 'inputdigitalcable'
-tv.add_toggle('input', 'inputrgbpc', 'inputdigitalcable')
+tv.add_toggle('input', 'inputrgbpc', 'inputhdmi1')
 
 # Sometimes a single remote button press is detected as many. By debouncing a
 # command, we make sure its only called once per button press.

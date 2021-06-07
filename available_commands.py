@@ -2,7 +2,9 @@
 #
 from libLGTV_serial import LGTV
 
-model = '42LK450'                    # Change this to your TV's model
+# Change this to your TV's model
+model = '42LW650s'
+
 tv = LGTV(model, 'dont_care')
 
 # Example of adding a custom toggle command. Passing in '--toggleinput'
@@ -10,4 +12,3 @@ tv = LGTV(model, 'dont_care')
 tv.add_toggle('input', 'inputrgbpc', 'inputdigitalcable')
 
 tv.available_commands()
-input("Press Enter to continue...")
